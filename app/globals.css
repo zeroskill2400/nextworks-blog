@@ -102,6 +102,33 @@ img{display:block;max-width:100%}
 .go a:hover{background:var(--live);color:#fff}
 .go a.in,.card .foot a.in{background:var(--ink);border-color:var(--ink);color:#fff}
 .go a.in:hover,.card .foot a.in:hover{background:var(--live);border-color:var(--live)}
+/* 도구: 물어보기·공유·필터·검색 */
+.ask{display:inline-flex;align-items:center;font:inherit;font-size:13.5px;font-weight:600;color:#191600;background:#FEE500;
+  border:1px solid #FEE500;border-radius:999px;padding:6px 13px;cursor:pointer;transition:background .12s}
+.ask:hover{background:#F5DC00}
+.ask.done{background:var(--wash);border-color:var(--line);color:var(--body);font-weight:500}
+.share{margin-top:44px;padding:20px 22px;background:var(--wash);border-radius:8px}
+.share .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.share button{font:inherit;font-size:13.5px;font-weight:500;padding:9px 15px;border-radius:6px;cursor:pointer;
+  border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.share button.pri{background:#FEE500;border-color:#FEE500;color:#191600;font-weight:600}
+.share button:hover{border-color:var(--live)}
+.share .st{font-size:13px;color:var(--live)}
+.share textarea{margin-top:12px;width:100%;font:inherit;font-size:14px;line-height:1.7;color:var(--body);
+  padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--bg);resize:vertical}
+.filter{margin-top:22px;display:flex;gap:8px;flex-wrap:wrap}
+.filter button{font:inherit;font-size:13.5px;font-weight:500;color:var(--body);background:var(--bg);
+  border:1px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+.filter button b{font-weight:600;color:var(--faint);font-size:12px}
+.filter button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.filter button.on b{color:rgba(255,255,255,.7)}
+.arch .bar2{display:flex;gap:10px;margin-top:16px}
+.arch input,.arch select{font:inherit;font-size:14.5px;padding:10px 13px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.arch input{flex:1;min-width:0}
+.arch input:focus,.arch select:focus{border-color:var(--live);outline:none}
+.arch .cnt{margin-top:14px;font-size:12.5px;color:var(--faint)}
+.row .sub .n{margin-left:2px;color:var(--faint)}
+.cards .when em,.doc .when em{font-style:normal;color:var(--faint);font-weight:400;margin-left:8px}
 /* 기사 페이지 */
 .story{padding:40px 0 84px;max-width:740px}
 .crumb{display:flex;gap:10px;font-size:13px;color:var(--faint);flex-wrap:wrap}

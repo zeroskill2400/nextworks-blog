@@ -1,5 +1,8 @@
 import { daily, one, parseDaily, longDate } from '../../../../lib/content';
 import { Bar, Foot } from '../../../_parts/Chrome';
+import { Ask } from '../../../_parts/Tools';
+
+const BASE = 'https://nextworks-blog.vercel.app';
 
 export function generateStaticParams() {
   return daily().filter((x) => /^### /m.test(x.body)).flatMap((x) =>
@@ -55,11 +58,10 @@ export default async function Page({ params }) {
             ))}
           </dl>
         )}
-        {it.links.length > 0 && (
-          <div className="go">
-            {it.links.map((l, i) => <a key={i} href={l.url} target="_blank" rel="noopener">{l.name} ↗</a>)}
-          </div>
-        )}
+        <div className="go">
+          {it.links.map((l, i) => <a key={i} href={l.url} target="_blank" rel="noopener">{l.name} ↗</a>)}
+          <Ask title={it.title} url={`${BASE}/daily/${slug}/${n}`} />
+        </div>
         <nav className="pn">
           {prev ? <a className="p" href={`/daily/${slug}/${prev.n}`}><small>이전</small>{prev.title}</a> : <span />}
           {next ? <a className="n" href={`/daily/${slug}/${next.n}`}><small>다음</small>{next.title}</a> : <span />}

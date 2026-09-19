@@ -1,14 +1,17 @@
-import { daily, one, html, parseDaily, longDate } from '../../../lib/content';
+import { daily, one, html, parseDaily, longDate, kindOf, shareText, issueNo } from '../../../lib/content';
 import { Bar, Foot } from '../../_parts/Chrome';
+import { Ask, Share, Filter } from '../../_parts/Tools';
+
+const BASE = 'https://nextworks-blog.vercel.app';
 
 export function generateStaticParams() {
   return daily().map((x) => ({ slug: x.slug }));
 }
 
-function Item({ it, slug }) {
+function Item({ it, slug, kind }) {
   const href = `/daily/${slug}/${it.n}`;
   return (
-    <article className="it" id={it.id}>
+    <article className="it" id={it.id} data-kind={kind}>
       <h3><a href={href}>{it.title}</a></h3>
       {it.lead.map((p, i) => <p key={i} dangerouslySetInnerHTML={{ __html: p }} />)}
       {it.bullets.length > 0 && (
@@ -29,6 +32,7 @@ function Item({ it, slug }) {
         {it.links.map((l, i) => (
           <a key={i} href={l.url} target="_blank" rel="noopener">{l.name} ↗</a>
         ))}
+        <Ask title={it.title} url={`${BASE}${href}`} />
       </div>
     </article>
   );
@@ -50,12 +54,17 @@ export default async function Page({ params }) {
   const structured = /^### /m.test(doc.body);
   const d = structured ? parseDaily(doc.body) : null;
   const allItems = d ? d.sections.flatMap((s) => s.items) : [];
+  const no = issueNo(slug);
+  const kinds = d ? Object.fromEntries(d.sections.flatMap((s) => s.items.map((it) => [it.id, kindOf(it, s.title)]))) : {};
+  const counts = { all: allItems.length + (d && d.programs ? 1 : 0) };
+  Object.values(kinds).forEach((k) => { counts[k] = (counts[k] || 0) + 1; });
+  if (d && d.programs) counts.program = (counts.program || 0) + 1;
 
   return (
     <>
       <Bar />
       <article className="wrap doc">
-        <div className="when">{longDate(doc.date)}</div>
+        <div className="when">{longDate(doc.date)}<em>{no}호</em></div>
         <h1>{doc.title}</h1>
         <p className="gist">{doc.summary}</p>
 
@@ -74,15 +83,17 @@ export default async function Page({ params }) {
               </ol>
             </nav>
 
+            <Filter counts={counts} />
+
             {d.sections.map((s, i) => (
-              <section className="sec" key={i}>
+              <section className="sec" key={i} data-sec>
                 <h2>{s.title}</h2>
-                {s.items.map((it) => <Item key={it.id} it={it} slug={slug} />)}
+                {s.items.map((it) => <Item key={it.id} it={it} slug={slug} kind={kinds[it.id]} />)}
               </section>
             ))}
 
             {d.programs && (
-              <section className="sec" id="programs">
+              <section className="sec" id="programs" data-sec data-kind="program">
                 <h2>{d.programs.title}</h2>
                 {d.programs.note && <p className="note">{d.programs.note}</p>}
                 <table className="prog">
@@ -99,6 +110,8 @@ export default async function Page({ params }) {
                 </table>
               </section>
             )}
+
+            <Share title={doc.title} text={shareText(doc, d, no)} url={`${BASE}/daily/${slug}`} />
           </>
         ) : (
           <div className="md" dangerouslySetInnerHTML={{ __html: html(doc.body) }} />

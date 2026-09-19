@@ -1,23 +1,21 @@
-import { all, shortDate, KIND } from '../../lib/content';
+import { all, daily, parseDaily } from '../../lib/content';
 import { Bar, Foot, Side } from '../_parts/Chrome';
+import { Search } from '../_parts/Tools';
 
 export default function Archive() {
+  const order = daily().map((x) => x.slug).sort();
+  const docs = all().map((x) => ({
+    kind: x.kind, slug: x.slug, title: x.title, summary: x.summary, date: String(x.date), cover: x.cover || null,
+    n: x.kind === 'daily' ? order.indexOf(x.slug) + 1 : null,
+    items: x.kind === 'daily' && /^### /m.test(x.body) ? parseDaily(x.body).items.map((i) => i.title).join(' ') : '',
+  }));
   return (
     <>
       <Bar />
       <div className="wrap two">
         <main>
           <div className="head">지난 글 전체</div>
-          {all().map((x) => (
-            <article className="row" key={`${x.kind}-${x.slug}`}>
-              <div className="t">
-                <h2><a href={`/${x.kind}/${x.slug}`}>{x.title}</a></h2>
-                <p>{x.summary}</p>
-                <div className="sub">{shortDate(x.date)}<span>·</span><b>{KIND[x.kind]}</b></div>
-              </div>
-              {x.cover && <div className="pic"><img src={x.cover} alt="" /></div>}
-            </article>
-          ))}
+          <Search docs={docs} />
         </main>
         <Side />
       </div>
