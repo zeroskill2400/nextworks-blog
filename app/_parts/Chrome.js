@@ -1,5 +1,6 @@
 const SITE = 'https://nextworks-kr.vercel.app';
 export const KAKAO = 'https://open.kakao.com/o/sSxg1ANi';
+export const MAIL = 'zeroskill2400@gmail.com';
 
 export function Bar() {
   return (
@@ -24,6 +25,7 @@ export function Foot() {
         <span className="rt">
           <a href={SITE}>회사 소개</a>
           <a href="https://github.com/zeroskill2400">GitHub</a>
+          <a href={`mailto:${MAIL}`}>{MAIL}</a>
         </span>
       </div>
     </footer>
@@ -40,6 +42,7 @@ export function Side() {
         </div>
         <p>결제와 정산처럼 틀리면 안 되는 시스템을 만들어 왔습니다. 매일 손으로 하던 일을 프로그램으로 바꾸는 일을 합니다.</p>
         <a className="to" href={SITE}>작업 문의하기</a>
+        <a className="mail" href={`mailto:${MAIL}?subject=${encodeURIComponent('작업 문의')}`}>{MAIL}</a>
       </div>
       <div className="box talk">
         <div className="sh">읽다가 궁금한 것이 있으면</div>

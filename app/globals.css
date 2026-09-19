@@ -60,6 +60,8 @@ img{display:block;max-width:100%}
 .side .box .to{margin-top:14px;display:block;text-align:center;font-size:13.5px;font-weight:600;
   background:var(--ink);color:#fff;padding:10px 0;border-radius:5px}
 .side .box .to:hover{background:var(--live)}
+.side .box .mail{display:block;text-align:center;margin-top:10px;font-size:12.5px;color:var(--mute)}
+.side .box .mail:hover{color:var(--live)}
 .sh{font-size:12.5px;font-weight:600;color:var(--mute);margin-bottom:11px}
 .li{display:flex;gap:10px;padding:7px 0;font-size:13.5px;line-height:1.55}
 .li i{font-style:normal;font-weight:600;color:var(--live);width:12px;flex-shrink:0}
