@@ -6,14 +6,10 @@ export function generateStaticParams() {
 }
 
 function Item({ it }) {
+  const main = it.links[0];
   return (
     <article className="it" id={it.id}>
-      {it.source && (
-        <div className="src">
-          <a href={it.source.url} target="_blank" rel="noopener">{it.source.name} 원문</a>
-        </div>
-      )}
-      <h3>{it.title}</h3>
+      <h3>{main ? <a href={main.url} target="_blank" rel="noopener">{it.title}<span className="arr" aria-hidden="true">↗</span></a> : it.title}</h3>
       {it.lead.map((p, i) => <p key={i} dangerouslySetInnerHTML={{ __html: p }} />)}
       {it.bullets.length > 0 && (
         <ul>{it.bullets.map((b, i) => <li key={i} dangerouslySetInnerHTML={{ __html: b }} />)}</ul>
@@ -27,6 +23,13 @@ function Item({ it }) {
             </div>
           ))}
         </dl>
+      )}
+      {it.links.length > 0 && (
+        <div className="go">
+          {it.links.map((l, i) => (
+            <a key={i} href={l.url} target="_blank" rel="noopener">{l.name}</a>
+          ))}
+        </div>
       )}
     </article>
   );
@@ -56,7 +59,7 @@ export default async function Page({ params }) {
                 {allItems.map((it) => (
                   <li key={it.id}>
                     <a href={`#${it.id}`}>{it.title}</a>
-                    {it.source && <span>{it.source.name}</span>}
+                    {it.links[0] && <span>{it.links[0].name}</span>}
                   </li>
                 ))}
                 {d.programs && <li><a href="#programs">{d.programs.title}</a><span>기업마당</span></li>}
