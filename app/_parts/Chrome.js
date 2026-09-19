@@ -1,5 +1,5 @@
 const SITE = 'https://nextworks-kr.vercel.app';
-export const KAKAO = '#'; // TODO 사용자에게 1:1 오픈프로필 링크 받아 채운다
+export const KAKAO = 'https://open.kakao.com/o/sSxg1ANi';
 
 export function Bar() {
   return (
