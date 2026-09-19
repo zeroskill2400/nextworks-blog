@@ -14,7 +14,7 @@ export default function Archive() {
       <Bar />
       <div className="wrap two">
         <main>
-          <div className="head">지난 글 전체</div>
+          <div className="head">지난 글</div>
           <Search docs={docs} />
         </main>
         <Side />

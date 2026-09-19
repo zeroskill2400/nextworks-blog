@@ -83,14 +83,21 @@ export function Filter({ counts }) {
 export function Search({ docs }) {
   const [q, setQ] = useState('');
   const [month, setMonth] = useState('');
+  const [kind, setKind] = useState('daily');
+  useEffect(() => { if (location.hash === '#posts') setKind('posts'); }, []);
   const months = useMemo(() => [...new Set(docs.map((d) => d.date.slice(0, 7)))], [docs]);
   const hit = useMemo(() => {
     const t = q.trim().toLowerCase();
-    return docs.filter((d) => (!month || d.date.startsWith(month)) &&
+    return docs.filter((d) => d.kind === kind && (!month || d.date.startsWith(month)) &&
       (!t || `${d.title} ${d.summary} ${d.items || ''}`.toLowerCase().includes(t)));
-  }, [docs, q, month]);
+  }, [docs, q, month, kind]);
+  const cnt = (k) => docs.filter((d) => d.kind === k).length;
   return (
     <div className="arch">
+      <div className="tabs" role="tablist">
+        <button type="button" role="tab" className={kind === 'daily' ? 'on' : ''} onClick={() => setKind('daily')}>뉴스 {cnt('daily')}</button>
+        <button type="button" role="tab" className={kind === 'posts' ? 'on' : ''} onClick={() => setKind('posts')}>기록 {cnt('posts')}</button>
+      </div>
       <div className="bar2">
         <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="제목, 요약, 꼭지 제목에서 찾기" aria-label="검색" />
         <select value={month} onChange={(e) => setMonth(e.target.value)} aria-label="월 선택">
@@ -104,7 +111,7 @@ export function Search({ docs }) {
           <div className="t">
             <h2><a href={`/${x.kind}/${x.slug}`}>{x.title}</a></h2>
             <p>{x.summary}</p>
-            <div className="sub">{x.date.replace(/-/g, '.')}<span>·</span><b>{x.kind === 'daily' ? '뉴스' : '기록'}</b>{x.n ? <span className="n">{x.n}호</span> : null}</div>
+            <div className="sub">{x.date.replace(/-/g, '.')}{x.n ? <span className="n">{x.n}호</span> : null}</div>
           </div>
           {x.cover && <div className="pic"><img src={x.cover} alt="" /></div>}
         </article>
