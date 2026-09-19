@@ -80,11 +80,15 @@ export function Filter({ counts }) {
 }
 
 /* 아카이브 검색 */
-export function Search({ docs }) {
+export function Search({ docs, kind: fixed }) {
   const [q, setQ] = useState('');
   const [month, setMonth] = useState('');
-  const [kind, setKind] = useState('daily');
-  useEffect(() => { if (location.hash === '#posts') setKind('posts'); }, []);
+  const [kind, setKind] = useState(fixed || 'daily');
+  useEffect(() => {
+    const u = new URL(location.href);
+    if (u.searchParams.get('q')) setQ(u.searchParams.get('q'));
+    if (!fixed && location.hash === '#posts') setKind('posts');
+  }, [fixed]);
   const months = useMemo(() => [...new Set(docs.map((d) => d.date.slice(0, 7)))], [docs]);
   const hit = useMemo(() => {
     const t = q.trim().toLowerCase();
@@ -94,10 +98,12 @@ export function Search({ docs }) {
   const cnt = (k) => docs.filter((d) => d.kind === k).length;
   return (
     <div className="arch">
-      <div className="tabs" role="tablist">
-        <button type="button" role="tab" className={kind === 'daily' ? 'on' : ''} onClick={() => setKind('daily')}>뉴스 {cnt('daily')}</button>
-        <button type="button" role="tab" className={kind === 'posts' ? 'on' : ''} onClick={() => setKind('posts')}>기록 {cnt('posts')}</button>
-      </div>
+      {!fixed && (
+        <div className="tabs" role="tablist">
+          <button type="button" role="tab" className={kind === 'daily' ? 'on' : ''} onClick={() => setKind('daily')}>뉴스 {cnt('daily')}</button>
+          <button type="button" role="tab" className={kind === 'posts' ? 'on' : ''} onClick={() => setKind('posts')}>기록 {cnt('posts')}</button>
+        </div>
+      )}
       <div className="bar2">
         <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="제목, 요약, 꼭지 제목에서 찾기" aria-label="검색" />
         <select value={month} onChange={(e) => setMonth(e.target.value)} aria-label="월 선택">
@@ -113,7 +119,7 @@ export function Search({ docs }) {
             <p>{x.summary}</p>
             <div className="sub">{x.date.replace(/-/g, '.')}{x.n ? <span className="n">{x.n}호</span> : null}</div>
           </div>
-          {x.cover && <div className="pic"><img src={x.cover} alt="" /></div>}
+          {x.cover && <a className="pic" href={`/${x.kind}/${x.slug}`}><img src={x.cover} alt="" /></a>}
         </article>
       ))}
     </div>

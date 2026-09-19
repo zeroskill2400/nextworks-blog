@@ -1,12 +1,16 @@
-import { daily, posts, longDate, shortDate } from '../lib/content';
-import { Bar, Foot, Side } from './_parts/Chrome';
+import { daily, posts, parseDaily, longDate, shortDate } from '../lib/content';
+import { Bar, Foot, Side, Top } from './_parts/Chrome';
 
 export default function Home() {
   const news = daily();
   const top = news[0];
-  const older = news.slice(1);
   const order = news.map((x) => x.slug).sort();
   const no = (slug) => order.indexOf(slug) + 1;
+  const items = top && /^### /m.test(top.body) ? parseDaily(top.body).items.slice(0, 5) : [];
+  const rows = [
+    ...news.map((x) => ({ kind: 'daily', slug: x.slug, title: x.title, summary: x.summary, date: x.date, pic: `/og/${x.slug}-thumb.png`, tag: `${no(x.slug)}호` })),
+    ...posts().map((x) => ({ kind: 'posts', slug: x.slug, title: x.title, summary: x.summary, date: x.date, pic: x.cover, tag: '기록' })),
+  ].sort((a, b) => (a.date < b.date ? 1 : -1));
 
   return (
     <>
@@ -22,36 +26,20 @@ export default function Home() {
         </section>
       )}
 
-      <div className="wrap home2">
+      <div className="wrap two">
         <main>
-          <section className="block">
-            <div className="head"><span>지난 뉴스</span><a href="/archive">전체 보기</a></div>
-            {older.length ? (
-              <ol className="nl">
-                {older.map((x) => (
-                  <li key={x.slug}><time>{shortDate(x.date)}</time><a href={`/daily/${x.slug}`}>{x.title}</a><em>{no(x.slug)}호</em></li>
-                ))}
-              </ol>
-            ) : (
-              <p className="note">1호가 방금 나왔습니다. 매일 한 호씩 쌓입니다.</p>
-            )}
-          </section>
-
-          <section className="block">
-            <div className="head"><span>기록 · 직접 만들며 남긴 것</span><a href="/archive#posts">전체 보기</a></div>
-            {posts().map((x) => (
-              <article className="row" key={x.slug}>
-                <div className="t">
-                  <h2><a href={`/posts/${x.slug}`}>{x.title}</a></h2>
-                  <p>{x.summary}</p>
-                  <div className="sub">{shortDate(x.date)}</div>
-                </div>
-                {x.cover && <div className="pic"><img src={x.cover} alt="" /></div>}
-              </article>
-            ))}
-          </section>
+          {rows.map((x) => (
+            <article className="row" key={`${x.kind}-${x.slug}`}>
+              <div className="t">
+                <h2><a href={`/${x.kind}/${x.slug}`}>{x.title}</a></h2>
+                <p>{x.summary}</p>
+                <div className="sub">{shortDate(x.date)}<span>·</span><b>{x.tag}</b></div>
+              </div>
+              {x.pic && <a className="pic" href={`/${x.kind}/${x.slug}`}><img src={x.pic} alt="" /></a>}
+            </article>
+          ))}
         </main>
-        <Side />
+        <Side top={top ? <Top slug={top.slug} items={items} /> : null} />
       </div>
       <Foot />
     </>

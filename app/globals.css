@@ -21,7 +21,10 @@ img{display:block;max-width:100%}
 .sig i{font-style:normal;color:var(--live)}
 .bar nav{display:flex;gap:20px;font-size:14px;color:var(--mute)}
 .bar nav a:hover{color:var(--ink)}
-.bar .out{margin-left:auto;font-size:13.5px;color:var(--live);font-weight:500}
+.bar .q{margin-left:auto;display:flex}
+.bar .q input{font:inherit;font-size:13.5px;width:220px;padding:7px 12px;border:1px solid var(--line);border-radius:4px;background:var(--wash);color:var(--ink)}
+.bar .q input:focus{outline:none;border-color:var(--ink);background:var(--bg)}
+.bar .out{margin-left:0;font-size:13.5px;color:var(--live);font-weight:500}
 .bar .out:hover{text-decoration:underline;text-underline-offset:3px}
 
 /* 오늘 */
@@ -154,6 +157,18 @@ img{display:block;max-width:100%}
 .arch .cnt{margin-top:14px;font-size:12.5px;color:var(--faint)}
 .row .sub .n{margin-left:2px;color:var(--faint)}
 .cards .when em,.doc .when em{font-style:normal;color:var(--faint);font-weight:400;margin-left:8px}
+/* 띠 머리 (목록 페이지) */
+.band{background:var(--wash);border-bottom:1px solid var(--line);padding:34px 0}
+.band .wrap{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap}
+.band h1{font-size:26px;font-weight:600;letter-spacing:-.04em;padding-right:22px;border-right:1px solid var(--line)}
+.band p{font-size:15px;color:var(--body)}
+/* 옆: 오늘 담긴 것 */
+.top5 ol{list-style:none;counter-reset:t}
+.top5 li{display:flex;gap:12px;align-items:baseline;padding:8px 0;font-size:13.5px;line-height:1.55}
+.top5 li::before{counter-increment:t;content:counter(t);font-weight:600;color:var(--ink);width:10px;flex-shrink:0;font-size:13px}
+.top5 li a{color:var(--body);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.top5 li a:hover{color:var(--live)}
+.row .pic{display:block}
 /* 홈: 뉴스와 기록 분리 */
 .home2{display:grid;grid-template-columns:1fr 280px;gap:54px;padding:38px 0 72px}
 .home2 .block+.block{margin-top:44px}
@@ -242,6 +257,8 @@ img{display:block;max-width:100%}
 
 @media(max-width:840px){
   .bar nav{display:none}
+  .bar .q{display:none}
+  .band h1{border-right:0;padding-right:0}
   .two{grid-template-columns:1fr;gap:34px;padding:28px 0 56px}
   .today{padding:30px 0 28px}
   .today h1{font-size:22px}

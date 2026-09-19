@@ -8,9 +8,12 @@ export function Bar() {
       <div className="wrap in">
         <a className="sig" href="/">넥스트<i>웍스</i> 기록</a>
         <nav>
-          <a href="/">오늘의 뉴스</a>
-          <a href="/archive">지난 글</a>
+          <a href="/news">뉴스</a>
+          <a href="/posts">기록</a>
         </nav>
+        <form className="q" action="/news" method="get" role="search">
+          <input type="search" name="q" placeholder="뉴스에서 검색" aria-label="뉴스에서 검색" />
+        </form>
         <a className="out" href={SITE}>작업 문의</a>
       </div>
     </header>
@@ -32,9 +35,22 @@ export function Foot() {
   );
 }
 
-export function Side() {
+export function Top({ slug, items }) {
+  if (!items || !items.length) return null;
+  return (
+    <div className="box top5">
+      <div className="sh">오늘 담긴 것</div>
+      <ol>
+        {items.map((it) => <li key={it.n}><a href={`/daily/${slug}/${it.n}`}>{it.title}</a></li>)}
+      </ol>
+    </div>
+  );
+}
+
+export function Side({ top }) {
   return (
     <aside className="side">
+      {top}
       <div className="box">
         <div className="who">
           <span className="dot" />
