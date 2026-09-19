@@ -137,6 +137,45 @@ img{display:block;max-width:100%}
 }
 .back{display:inline-block;margin-top:42px;font-size:14px;color:var(--live);font-weight:500}
 
+
+/* 카드 버전 */
+.cards{padding:40px 0 80px}
+.cards .top{max-width:740px;margin-bottom:30px}
+.cards .top h1{margin-top:12px;font-size:31px;line-height:1.4;font-weight:600;letter-spacing:-.045em}
+.cards .top .gist{margin-top:14px;font-size:16px;line-height:1.85;color:var(--body)}
+.grp{margin-top:36px}
+.grp h2{font-size:14px;font-weight:600;color:var(--mute);padding-bottom:10px;border-bottom:1.5px solid var(--ink);margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{border:1px solid var(--line);border-radius:10px;padding:22px 22px 18px;background:var(--bg);
+  display:flex;flex-direction:column;gap:12px;min-width:0}
+.card.feature{background:var(--wash);border-color:transparent;padding:28px 30px 22px}
+.card.wide{grid-column:1/-1}
+.card .tag{font-size:12px;font-weight:600;color:var(--live)}
+.card h3{font-size:18.5px;line-height:1.45;font-weight:600;letter-spacing:-.035em}
+.card.feature h3{font-size:24px;max-width:24em}
+.card h3 a{color:var(--ink)}
+.card h3 a:hover{color:var(--live)}
+.card .lead{font-size:15px;line-height:1.78;color:var(--body)}
+.card.feature .lead{font-size:16px}
+.card ul{margin:0 0 0 19px}
+.card li{font-size:15px;line-height:1.72;color:var(--body);margin:5px 0}
+.card .take{display:grid;grid-template-columns:7.5em 1fr;gap:12px;padding:12px 14px;border-radius:6px;
+  background:var(--wash);font-size:14px;line-height:1.7;color:var(--body)}
+.card.feature .take{background:var(--bg)}
+.card .take b{font-weight:600;color:var(--ink)}
+.card .take.sub{background:transparent;padding:0 14px;color:var(--mute)}
+.card .foot{margin-top:auto;padding-top:6px;display:flex;flex-wrap:wrap;gap:8px}
+.card .foot a{font-size:13px;font-weight:500;color:var(--live);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.card .foot a:hover{border-color:var(--live)}
+.card .prog{margin-top:6px}
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr}
+  .card.feature{padding:22px 20px 18px}
+  .card.feature h3{font-size:20px}
+  .card .take{grid-template-columns:1fr;gap:3px}
+  .cards .top h1{font-size:23px}
+}
+
 .foot{border-top:1px solid var(--line);padding:30px 0;font-size:12.5px;color:var(--faint)}
 .foot .in{display:flex;gap:16px;flex-wrap:wrap}
 .foot .rt{margin-left:auto;display:flex;gap:15px}
