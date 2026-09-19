@@ -5,6 +5,15 @@ export function generateStaticParams() {
   return posts().map((x) => ({ slug: x.slug }));
 }
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const doc = one('posts', slug);
+  if (!doc) return {};
+  return { title: doc.title, description: doc.summary,
+    openGraph: { type: 'article', title: doc.title, description: doc.summary, url: `/posts/${slug}`,
+      images: [{ url: doc.cover || '/og/default.png', width: 1200, height: 630 }] } };
+}
+
 export default async function Page({ params }) {
   const { slug } = await params;
   const doc = one('posts', slug);

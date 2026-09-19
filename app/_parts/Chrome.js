@@ -1,4 +1,5 @@
 const SITE = 'https://nextworks-kr.vercel.app';
+export const KAKAO = '#'; // TODO 사용자에게 1:1 오픈프로필 링크 받아 채운다
 
 export function Bar() {
   return (
@@ -41,9 +42,9 @@ export function Side() {
         <a className="to" href={SITE}>작업 문의하기</a>
       </div>
       <div className="box talk">
-        <div className="sh">매일 아침 카톡으로</div>
-        <p>정리한 뉴스를 오픈채팅방에 올립니다. 읽다가 궁금한 건 바로 물어보셔도 됩니다.</p>
-        <a className="to" href="#">오픈채팅 참여하기</a>
+        <div className="sh">읽다가 궁금한 것이 있으면</div>
+        <p>이 도구를 우리 회사에도 붙일 수 있는지, 얼마나 걸리는지 같은 질문은 카카오톡으로 바로 물어보셔도 됩니다.</p>
+        <a className="to" href={KAKAO}>카카오톡으로 물어보기</a>
       </div>
     </aside>
   );

@@ -12,7 +12,7 @@ export default function Home() {
       {top && (
         <section className="today">
           <div className="wrap">
-            <div className="when">{longDate(top.date)}<em>매일 아침 7시</em></div>
+            <div className="when">{longDate(top.date)}<em>{news.length}호</em></div>
             <h1><a href={`/daily/${top.slug}`}>{top.title}</a></h1>
             <p className="gist">{top.summary}</p>
             <a className="more" href={`/daily/${top.slug}`}>오늘 뉴스 전체 읽기</a>

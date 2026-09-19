@@ -1,8 +1,13 @@
 import './globals.css';
 
+const BASE = 'https://nextworks-blog.vercel.app';
 export const metadata = {
-  title: '넥스트웍스 기록',
-  description: '사업에 쓰는 AI와 자동화 소식, 그리고 직접 만들며 남긴 기록.',
+  metadataBase: new URL(BASE),
+  title: { default: '넥스트웍스 기록', template: '%s · 넥스트웍스 기록' },
+  description: '사업에 쓰는 AI와 자동화 소식을 매일 정리하고, 직접 만들며 남긴 기록을 올립니다.',
+  openGraph: { type: 'website', siteName: '넥스트웍스 기록', locale: 'ko_KR',
+    images: [{ url: '/og/default.png', width: 1200, height: 630 }] },
+  twitter: { card: 'summary_large_image' },
 };
 
 export default function RootLayout({ children }) {

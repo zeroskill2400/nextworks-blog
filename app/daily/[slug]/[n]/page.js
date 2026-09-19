@@ -6,6 +6,18 @@ export function generateStaticParams() {
     parseDaily(x.body).items.map((it) => ({ slug: x.slug, n: String(it.n) })));
 }
 
+export async function generateMetadata({ params }) {
+  const { slug, n } = await params;
+  const doc = one('daily', slug);
+  if (!doc) return {};
+  const it = parseDaily(doc.body).items.find((x) => String(x.n) === n);
+  if (!it) return {};
+  const desc = it.lead[0] ? it.lead[0].replace(/<[^>]+>/g, '').slice(0, 150) : doc.summary;
+  return { title: it.title, description: desc,
+    openGraph: { type: 'article', title: it.title, description: desc, url: `/daily/${slug}/${n}`,
+      images: [{ url: `/og/${slug}.png`, width: 1200, height: 630 }] } };
+}
+
 export default async function Page({ params }) {
   const { slug, n } = await params;
   const doc = one('daily', slug);
