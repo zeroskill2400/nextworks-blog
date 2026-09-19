@@ -5,11 +5,11 @@ export function generateStaticParams() {
   return daily().map((x) => ({ slug: x.slug }));
 }
 
-function Item({ it }) {
-  const main = it.links[0];
+function Item({ it, slug }) {
+  const href = `/daily/${slug}/${it.n}`;
   return (
     <article className="it" id={it.id}>
-      <h3>{main ? <a href={main.url} target="_blank" rel="noopener">{it.title}<span className="arr" aria-hidden="true">↗</span></a> : it.title}</h3>
+      <h3><a href={href}>{it.title}</a></h3>
       {it.lead.map((p, i) => <p key={i} dangerouslySetInnerHTML={{ __html: p }} />)}
       {it.bullets.length > 0 && (
         <ul>{it.bullets.map((b, i) => <li key={i} dangerouslySetInnerHTML={{ __html: b }} />)}</ul>
@@ -24,13 +24,12 @@ function Item({ it }) {
           ))}
         </dl>
       )}
-      {it.links.length > 0 && (
-        <div className="go">
-          {it.links.map((l, i) => (
-            <a key={i} href={l.url} target="_blank" rel="noopener">{l.name}</a>
-          ))}
-        </div>
-      )}
+      <div className="go">
+        <a className="in" href={href}>자세히 읽기</a>
+        {it.links.map((l, i) => (
+          <a key={i} href={l.url} target="_blank" rel="noopener">{l.name} ↗</a>
+        ))}
+      </div>
     </article>
   );
 }
@@ -69,7 +68,7 @@ export default async function Page({ params }) {
             {d.sections.map((s, i) => (
               <section className="sec" key={i}>
                 <h2>{s.title}</h2>
-                {s.items.map((it) => <Item key={it.id} it={it} />)}
+                {s.items.map((it) => <Item key={it.id} it={it} slug={slug} />)}
               </section>
             ))}
 

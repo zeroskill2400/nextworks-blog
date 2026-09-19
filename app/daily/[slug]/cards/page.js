@@ -5,14 +5,15 @@ export function generateStaticParams() {
   return daily().filter((x) => /^### /m.test(x.body)).map((x) => ({ slug: x.slug }));
 }
 
-function Card({ it, feature }) {
+function Card({ it, feature, slug }) {
   const main = it.links[0];
+  const href = `/daily/${slug}/${it.n}`;
   const first = it.judge[0];
   const rest = it.judge.slice(1);
   return (
     <article className={`card${feature ? ' feature' : ''}`} id={it.id}>
       {main && <div className="tag">{main.name}</div>}
-      <h3>{main ? <a href={main.url} target="_blank" rel="noopener">{it.title}</a> : it.title}</h3>
+      <h3><a href={href}>{it.title}</a></h3>
       {it.lead[0] && <p className="lead" dangerouslySetInnerHTML={{ __html: it.lead[0] }} />}
       {feature && it.bullets.length > 0 && (
         <ul>{it.bullets.map((b, i) => <li key={i} dangerouslySetInnerHTML={{ __html: b }} />)}</ul>
@@ -29,11 +30,10 @@ function Card({ it, feature }) {
           <span dangerouslySetInnerHTML={{ __html: j.v }} />
         </div>
       ))}
-      {it.links.length > 0 && (
-        <div className="foot">
-          {it.links.map((l, i) => <a key={i} href={l.url} target="_blank" rel="noopener">{l.name}</a>)}
-        </div>
-      )}
+      <div className="foot">
+        <a className="in" href={href}>자세히 읽기</a>
+        {it.links.map((l, i) => <a key={i} href={l.url} target="_blank" rel="noopener">{l.name} ↗</a>)}
+      </div>
     </article>
   );
 }
@@ -55,13 +55,13 @@ export default async function Page({ params }) {
           <p className="gist">{doc.summary}</p>
         </header>
 
-        {lead && lead.items[0] && <Card it={lead.items[0]} feature />}
+        {lead && lead.items[0] && <Card it={lead.items[0]} feature slug={slug} />}
 
         {others.map((s, i) => (
           <section className="grp" key={i}>
             <h2>{s.title}</h2>
             <div className="grid">
-              {s.items.map((it) => <Card key={it.id} it={it} />)}
+              {s.items.map((it) => <Card key={it.id} it={it} slug={slug} />)}
             </div>
           </section>
         ))}
