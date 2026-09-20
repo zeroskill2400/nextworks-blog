@@ -15,7 +15,7 @@ export default function Page() {
   return (
     <>
       <Bar />
-      <section className="band"><div className="wrap"><h1>기록</h1><p>직접 만들며 남긴 것. 무엇이 문제였고 어떻게 풀었는지 적습니다.</p></div></section>
+      <section className="band mesh"><div className="wrap"><h1>기록</h1><p>직접 만들며 남긴 것. 무엇이 문제였고 어떻게 풀었는지 적습니다.</p></div></section>
       <div className="wrap two">
         <main><Search docs={docs} kind="posts" /></main>
         <Side />

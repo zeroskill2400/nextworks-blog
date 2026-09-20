@@ -15,7 +15,7 @@ export default function Page() {
   return (
     <>
       <Bar />
-      <section className="band"><div className="wrap"><h1>뉴스</h1><p>사업에 쓰는 AI와 자동화 소식을 매일 한 호씩 정리합니다.</p></div></section>
+      <section className="band mesh"><div className="wrap"><h1>뉴스</h1><p>사업에 쓰는 AI와 자동화 소식을 매일 한 호씩 정리합니다.</p></div></section>
       <div className="wrap two">
         <main><Search docs={docs} kind="daily" /></main>
         <Side />

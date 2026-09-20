@@ -1,0 +1,8 @@
+[
+ {"name":"새벽","a":"#4F6BFF","b":"#9B6BFF","c":"#FF8FB1","ink":"#fff"},
+ {"name":"노을","a":"#FF6A3D","b":"#FFB347","c":"#FFE66D","ink":"#fff"},
+ {"name":"바다","a":"#1E6BFF","b":"#12C2E9","c":"#A6FFCB","ink":"#fff"},
+ {"name":"라벤더","a":"#7B61FF","b":"#B39DFF","c":"#FBC2EB","ink":"#fff"},
+ {"name":"숲","a":"#0E7C6B","b":"#2DD4BF","c":"#CFFAE3","ink":"#fff"},
+ {"name":"자정","a":"#1B3A6B","b":"#4C6FFF","c":"#9DB4FF","ink":"#fff"}
+]

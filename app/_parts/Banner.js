@@ -15,7 +15,7 @@ export function Banner({ slides }) {
   if (!n) return null;
   const s = slides[i];
   return (
-    <section className={`banner ${s.tone || 'blue'}`} onMouseEnter={() => setPause(true)} onMouseLeave={() => setPause(false)} aria-roledescription="carousel">
+    <section className={`banner ${s.tone || 'blue'}${s.pal ? ' mesh' : ''}`} style={s.pal ? { '--a': s.pal.a, '--b': s.pal.b, '--c': s.pal.c } : undefined} onMouseEnter={() => setPause(true)} onMouseLeave={() => setPause(false)} aria-roledescription="carousel">
       <div className="wrap in">
         <button type="button" className="arr l" aria-label="이전" onClick={() => setI((i - 1 + n) % n)}>‹</button>
         <a className="slide" href={s.href} target={s.ext ? '_blank' : undefined} rel={s.ext ? 'noopener' : undefined} key={i}>

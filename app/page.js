@@ -1,6 +1,7 @@
 import { daily, posts, parseDaily, longDate, shortDate } from '../lib/content';
 import { Bar, Foot, Side, Top } from './_parts/Chrome';
 import { Banner } from './_parts/Banner';
+import PALS from '../lib/palettes.json';
 
 const cut = (t, n) => (t.length <= n ? t : t.slice(0, n).replace(/\s+\S*$/, '') + '…');
 
@@ -15,7 +16,7 @@ export default function Home() {
   const SITE = 'https://nextworks-kr.vercel.app';
   const slides = [
     top && {
-      tone: 'blue', kicker: `오늘 뉴스 · ${longDate(top.date)} · ${no(top.slug)}호`,
+      tone: 'blue', pal: PALS[(no(top.slug) - 1) % PALS.length], kicker: `오늘 뉴스 · ${longDate(top.date)} · ${no(top.slug)}호`,
       title: top.title, lead: cut(top.summary, 110), href: `/daily/${top.slug}`, cta: '오늘 뉴스 전체 읽기',
     },
     {
@@ -36,7 +37,7 @@ export default function Home() {
       href: `${SITE}/#works`, ext: true, cta: '만든 것 보기',
     },
     progCount > 0 && top && {
-      tone: 'blue2', kicker: '오늘 뜬 지원사업',
+      tone: 'blue2', pal: PALS[5], kicker: '오늘 뜬 지원사업',
       title: `기업마당에 오늘 올라온 공고 중 ${progCount}건을 골랐습니다`,
       lead: '전국 단위와 온라인 판로, IT·디지털 관련만 추립니다. 사업명을 누르면 공고로 바로 갑니다.',
       href: `/daily/${top.slug}#programs`, cta: '지원사업 보기',
