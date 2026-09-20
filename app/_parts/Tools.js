@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
-import { KAKAO } from './Chrome';
+import { KAKAO } from '../../lib/links';
 
 /* 클립보드 복사 (실패해도 조용히) */
 async function copy(text) {

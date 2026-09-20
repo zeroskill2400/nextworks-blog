@@ -1,8 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-const KAKAO = 'https://open.kakao.com/o/sSxg1ANi';
-const MAIL = 'zeroskill2400@gmail.com';
+import { KAKAO, MAIL } from '../../lib/links';
 
 const CHIPS = [
   ['개발·자동화 문의', '매일 손으로 하는 일이 있는데 프로그램으로 바꿀 수 있을지 여쭤봅니다.'],

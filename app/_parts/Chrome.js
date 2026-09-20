@@ -1,9 +1,8 @@
 import { Nav } from './Nav';
 import { posts } from '../../lib/content';
 
-const SITE = 'https://nextworks-kr.vercel.app';
-export const KAKAO = 'https://open.kakao.com/o/sSxg1ANi';
-export const MAIL = 'zeroskill2400@gmail.com';
+import { SITE, KAKAO, MAIL } from '../../lib/links';
+export { KAKAO, MAIL };
 
 export function Bar() {
   return (
