@@ -1,7 +1,7 @@
 :root{
   /* D2 실측 (2026-09-20): 배경 #FFF, 제목 #434A53, 본문 #666, 날짜 #B5B5B5, 메뉴 #A0A0A0, 줄 #EDEDED, 굵은 줄 #D6D6D6, 띠 #0EBB6B → 우리 파랑 #2B6BFF (2026-09-20 사용자 결정) */
   --bg:#FFFFFF; --ink:#000000; --head:#434A53; --body:#666666; --mute:#A0A0A0; --faint:#B5B5B5;
-  --line:#EDEDED; --rule:#D6D6D6; --wash:#FFFFFF; --live:#2B6BFF; --wrap:1180px;
+  --line:#EDEDED; --rule:#D6D6D6; --wash:#FFFFFF; --live:#1B3A6B; --wrap:1180px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -42,8 +42,8 @@ img{display:block;max-width:100%}
 
 /* 배너 (홈 상단) */
 .banner{position:relative;color:#fff;overflow:hidden}
-.banner.blue{background:linear-gradient(135deg,#1F5EFF 0%,#2B6BFF 45%,#6FA0FF 100%)}
-.banner.blue2{background:linear-gradient(135deg,#0B3FBF 0%,#1F5EFF 60%,#2B6BFF 100%)}
+.banner.blue{background:#1B3A6B}
+.banner.blue2{background:#24467D}
 .banner.ink{background:#111318}
 .banner.paper{background:#F3F5F8;color:var(--ink)}
 .banner.paper .arr{color:rgba(0,0,0,.35)}
@@ -55,7 +55,7 @@ img{display:block;max-width:100%}
 .banner.paper .k{opacity:.7}
 .banner .shots{margin-top:18px;display:flex;gap:10px}
 .banner .shots img{width:150px;height:96px;object-fit:cover;object-position:top;border-radius:3px;border:1px solid rgba(0,0,0,.08);background:#fff}
-.banner::after{content:'';position:absolute;right:-160px;top:-180px;width:560px;height:560px;border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}
+
 .banner .in{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;min-height:360px;position:relative;z-index:1}
 .banner .slide{display:block;padding:44px 28px 34px;color:#fff;max-width:46em}
 .banner .k{font-size:13.5px;font-weight:500;opacity:.85}
@@ -106,7 +106,7 @@ img{display:block;max-width:100%}
 .side .box{border:0;border-top:1px solid var(--rule);border-radius:0;padding:18px 0 22px;margin-bottom:8px}
 .who{display:flex;gap:11px;align-items:center}
 .who .dot{width:42px;height:42px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(140deg,#2B6BFF,#8DB4FF)}
+  background:#1B3A6B}
 .who b{display:block;font-size:14.5px;font-weight:600}
 .who span{font-size:12.5px;color:var(--faint)}
 .side .box p{margin-top:13px;font-size:13.5px;line-height:1.72;color:var(--body)}
@@ -204,7 +204,7 @@ img{display:block;max-width:100%}
 .row .sub .n{margin-left:2px;color:var(--faint)}
 .cards .when em,.doc .when em{font-style:normal;color:var(--faint);font-weight:400;margin-left:8px}
 /* 띠 머리 (목록 페이지) */
-.band{background:#2B6BFF;color:#fff;padding:52px 0}
+.band{background:#1B3A6B;color:#fff;padding:52px 0}
 .band .wrap{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap}
 .band .wrap{justify-content:center}
 .band h1{font-size:30px;font-weight:600;letter-spacing:-.03em;padding-right:22px;border-right:1px solid rgba(255,255,255,.5)}
