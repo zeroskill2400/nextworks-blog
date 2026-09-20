@@ -17,7 +17,7 @@ export default function Page() {
       <Bar />
       <section className="band mesh"><div className="wrap"><h1>기록</h1><p>직접 만들며 남긴 것. 무엇이 문제였고 어떻게 풀었는지 적습니다.</p></div></section>
       <div className="wrap two">
-        <main><Search docs={docs} kind="posts" /></main>
+        <main>{docs.length ? <Search docs={docs} kind="posts" /> : <p className="note">직접 만들며 남긴 기록을 준비하고 있습니다. 뉴스는 매일 나옵니다.</p>}</main>
         <Side />
       </div>
       <Foot />
