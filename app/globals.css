@@ -41,16 +41,29 @@ img{display:block;max-width:100%}
   border-bottom:1px solid var(--live);padding-bottom:1px}
 
 /* 배너 (홈 상단) */
-.banner{position:relative;background:linear-gradient(135deg,#1F5EFF 0%,#2B6BFF 45%,#6FA0FF 100%);color:#fff;overflow:hidden}
+.banner{position:relative;color:#fff;overflow:hidden}
+.banner.blue{background:linear-gradient(135deg,#1F5EFF 0%,#2B6BFF 45%,#6FA0FF 100%)}
+.banner.blue2{background:linear-gradient(135deg,#0B3FBF 0%,#1F5EFF 60%,#2B6BFF 100%)}
+.banner.ink{background:#111318}
+.banner.paper{background:#F3F5F8;color:var(--ink)}
+.banner.paper .arr{color:rgba(0,0,0,.35)}
+.banner.paper .arr:hover{color:var(--ink);background:rgba(0,0,0,.06)}
+.banner.paper .dots button{background:rgba(0,0,0,.2)}
+.banner.paper .dots button.on{background:var(--ink)}
+.banner.paper .slide{color:var(--ink)}
+.banner.paper .go{border-bottom-color:rgba(0,0,0,.5)}
+.banner.paper .k{opacity:.7}
+.banner .shots{margin-top:18px;display:flex;gap:10px}
+.banner .shots img{width:150px;height:96px;object-fit:cover;object-position:top;border-radius:3px;border:1px solid rgba(0,0,0,.08);background:#fff}
 .banner::after{content:'';position:absolute;right:-160px;top:-180px;width:560px;height:560px;border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}
-.banner .in{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;min-height:300px;position:relative;z-index:1}
+.banner .in{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;min-height:360px;position:relative;z-index:1}
 .banner .slide{display:block;padding:44px 28px 34px;color:#fff;max-width:46em}
 .banner .k{font-size:13.5px;font-weight:500;opacity:.85}
 .banner h2{margin-top:12px;font-size:32px;line-height:1.38;font-weight:600;letter-spacing:-.045em}
 .banner p{margin-top:14px;font-size:16px;line-height:1.8;opacity:.9;max-width:38em}
 .banner .go{display:inline-block;margin-top:22px;font-size:14px;font-weight:600;border-bottom:1.5px solid rgba(255,255,255,.7);padding-bottom:2px}
 .banner .slide:hover .go{border-bottom-color:#fff}
-.banner .arr{font:inherit;font-size:34px;line-height:1;color:rgba(255,255,255,.6);background:none;border:0;cursor:pointer;width:44px;height:44px;border-radius:50%}
+.banner .arr{font:inherit;font-size:34px;line-height:1;color:rgba(255,255,255,.6);transition:none;background:none;border:0;cursor:pointer;width:44px;height:44px;border-radius:50%}
 .banner .arr:hover{color:#fff;background:rgba(255,255,255,.12)}
 .banner .dots{display:flex;gap:8px;justify-content:center;padding:0 0 18px;position:relative;z-index:1}
 .banner .dots button{width:8px;height:8px;border-radius:50%;border:0;background:rgba(255,255,255,.4);cursor:pointer;padding:0}
@@ -294,6 +307,8 @@ img{display:block;max-width:100%}
   .banner .arr{display:none}
   .banner .slide{padding:30px 0 26px}
   .banner h2{font-size:22px}
+  .banner .shots{overflow-x:auto}
+  .banner .shots img{width:120px;height:78px;flex-shrink:0}
   .bar nav{display:none}
   .bar .q{display:none}
   .band h1{border-right:0;padding-right:0}
