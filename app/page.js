@@ -1,12 +1,18 @@
 import { daily, posts, parseDaily, longDate, shortDate } from '../lib/content';
 import { Bar, Foot, Side, Top } from './_parts/Chrome';
+import { Banner } from './_parts/Banner';
+
+const cut = (t, n) => (t.length <= n ? t : t.slice(0, n).replace(/\s+\S*$/, '') + '…');
 
 export default function Home() {
   const news = daily();
   const top = news[0];
   const order = news.map((x) => x.slug).sort();
   const no = (slug) => order.indexOf(slug) + 1;
-  const items = top && /^### /m.test(top.body) ? parseDaily(top.body).items.slice(0, 5) : [];
+  const parsed = top && /^### /m.test(top.body) ? parseDaily(top.body) : null;
+  const items = parsed ? parsed.items.slice(0, 5) : [];
+  const slides = parsed ? parsed.items.map((it) => ({ n: it.n, title: it.title, section: it.section,
+    lead: cut((it.lead[0] || '').replace(/<[^>]+>/g, '').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>'), 120) })) : [];
   const rows = [
     ...news.map((x) => ({ kind: 'daily', slug: x.slug, title: x.title, summary: x.summary, date: x.date, pic: `/og/${x.slug}-thumb.png`, tag: `${no(x.slug)}호` })),
     ...posts().map((x) => ({ kind: 'posts', slug: x.slug, title: x.title, summary: x.summary, date: x.date, pic: x.cover, tag: '기록' })),
@@ -15,16 +21,7 @@ export default function Home() {
   return (
     <>
       <Bar />
-      {top && (
-        <section className="today">
-          <div className="wrap">
-            <div className="when">{longDate(top.date)}<em>{no(top.slug)}호</em></div>
-            <h1><a href={`/daily/${top.slug}`}>{top.title}</a></h1>
-            <p className="gist">{top.summary}</p>
-            <a className="more" href={`/daily/${top.slug}`}>오늘 뉴스 전체 읽기</a>
-          </div>
-        </section>
-      )}
+      {top && <Banner slides={slides} slug={top.slug} no={no(top.slug)} date={longDate(top.date)} />}
 
       <div className="wrap two">
         <main>

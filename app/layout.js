@@ -1,4 +1,5 @@
 import './globals.css';
+import { Talk } from './_parts/Talk';
 
 const BASE = 'https://nextworks-blog.vercel.app';
 export const metadata = {
@@ -18,7 +19,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </head>
-      <body>{children}</body>
+      <body>{children}<Talk /></body>
     </html>
   );
 }
