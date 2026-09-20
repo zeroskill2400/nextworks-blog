@@ -1,3 +1,5 @@
+import { Nav } from './Nav';
+
 const SITE = 'https://nextworks-kr.vercel.app';
 export const KAKAO = 'https://open.kakao.com/o/sSxg1ANi';
 export const MAIL = 'zeroskill2400@gmail.com';
@@ -7,10 +9,7 @@ export function Bar() {
     <header className="bar">
       <div className="wrap in">
         <a className="sig" href="/">넥스트<i>웍스</i> 기록</a>
-        <nav>
-          <a href="/news">뉴스</a>
-          <a href="/posts">기록</a>
-        </nav>
+        <Nav />
         <form className="q" action="/news" method="get" role="search">
           <input type="search" name="q" placeholder="뉴스에서 검색" aria-label="뉴스에서 검색" />
         </form>
