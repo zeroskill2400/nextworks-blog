@@ -19,7 +19,9 @@ img{display:block;max-width:100%}
   backdrop-filter:blur(8px);z-index:20}
 .bar .in{display:flex;align-items:center;height:60px;gap:30px}
 .sig{font-weight:600;font-size:16px;letter-spacing:-.035em}
-.sig i{font-style:normal;color:var(--live)}
+.sig i{font-style:normal;color:var(--live);
+  background:linear-gradient(120deg,#1B3A6B 0%,#4F6BFF 45%,#9B6BFF 75%,#FF8FB1 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 .bar nav{display:flex;gap:26px;font-size:16px;color:var(--mute)}
 .bar nav a{padding:4px 0;border-bottom:2px solid transparent}
 .bar nav a:hover{color:var(--ink)}
